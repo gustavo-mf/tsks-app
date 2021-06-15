@@ -1,5 +1,4 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import tasks from '../tasks.json';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -20,7 +19,8 @@ const theme = {
   gray850: '#272733',
   gray900: '#21212B',
   font: '#fff',
-  fontBtn: '#F5F5F6'
+  fontBtn: '#F5F5F6',
+  black: '#181820'
 };
 
 function MyApp({ Component, pageProps }) {
