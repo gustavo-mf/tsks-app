@@ -35,7 +35,7 @@ const HeaderWrapper = styled.header`
   }
 `;
 
-export default function Header(props) {
+export default function Header({ newTask }) {
   return (
     <HeaderWrapper>
       <div className="appName">
@@ -44,7 +44,7 @@ export default function Header(props) {
         </div>
         tsks.
       </div>
-      <button>New Task</button>
+      <button onClick={newTask}>New Task</button>
     </HeaderWrapper>
   );
 }

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import TaskComponent from '../src/components/Task';
+import Modal from '../src/components/Modal';
 
 import tasks from '../tasks.json';
 
@@ -62,6 +63,7 @@ const MainWrapper = styled.main`
 export default function Home() {
   const [status, setStatus] = React.useState('open');
   const [tasksList, setTasksList] = React.useState(tasks);
+  const [showModal, setshowModal] = React.useState(false);
   
   return (
     <BodyWrapper>
@@ -71,7 +73,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header newTask={() => setshowModal(true) }/>
         
       <MainWrapper>
         <h1>
@@ -92,7 +94,6 @@ export default function Home() {
         <div className="containerTasks" >
           {
             tasksList.map((elem, index) => {
-              console.log(elem,);
               if(elem.status == status) {
                 return (
                   <TaskComponent 
@@ -114,6 +115,8 @@ export default function Home() {
       </MainWrapper>
 
       <Footer />
+
+      <Modal show={showModal} close={() => setshowModal(false)}/>
     </BodyWrapper>
   )
 }

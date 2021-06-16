@@ -20,7 +20,8 @@ const theme = {
   gray900: '#21212B',
   font: '#F5F5F6',
   fontBtn: '#F5F5F6',
-  black: '#181820'
+  black: '#181820',
+  gray: '#777777'
 };
 
 function MyApp({ Component, pageProps }) {

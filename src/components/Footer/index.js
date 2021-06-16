@@ -6,6 +6,7 @@ const FooterWrapper = styled.footer`
   padding-top: 20px;
   font-size: 16px;
   color: ${props => props.theme.fontBtn};
+  margin-bottom: 20px;
 `;
 
 export default function Footer(props) {

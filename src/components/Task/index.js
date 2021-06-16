@@ -16,6 +16,8 @@ const TaskContainer = styled.div`
     padding: 20px;
     font-size: 16px;
 
+    i { cursor: pointer; }
+
     svg {
       color: ${props => props.theme.purple};
     }
@@ -45,7 +47,6 @@ const TaskContainer = styled.div`
 `;
 
 export default function Task({ taskContent, changeStatus }) {
-  console.log('[taskContent]',taskContent);
   return (
     <TaskContainer>
       <div className="taskHeader">
@@ -57,7 +58,7 @@ export default function Task({ taskContent, changeStatus }) {
           </i>
           {taskContent.title}
         </div>
-        <FiMoreHorizontal size="25" />
+        <i><FiMoreHorizontal size="25" /></i>
       </div>
       <div className="taskBody">
         {taskContent.description}
