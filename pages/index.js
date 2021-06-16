@@ -28,6 +28,8 @@ const MainWrapper = styled.main`
   }
 
   .containerStatus {
+    margin-bottom: 60px;
+
     button {
       border-radius: 20px;
       border: 1px solid;
@@ -44,12 +46,22 @@ const MainWrapper = styled.main`
     button.clicked {
       background-color: ${props => props.theme.gray750};
     }
+
+    @media screen and (max-width: 500px) {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 47%;
+        padding: 14px 60px;
+      }
+    }
   }
 `;
 
 export default function Home() {
   const [status, setStatus] = React.useState('open');
-  const [tasksList] = React.useState(tasks);
+  const [tasksList, setTasksList] = React.useState(tasks);
   
   return (
     <BodyWrapper>
@@ -79,9 +91,23 @@ export default function Home() {
 
         <div className="containerTasks" >
           {
-            tasksList.filter(elem => elem.status == status).map((filterdTask, index) => (
-              <TaskComponent key={'t-'+index} taskContent={filterdTask} />
-            ))
+            tasksList.map((elem, index) => {
+              console.log(elem,);
+              if(elem.status == status) {
+                return (
+                  <TaskComponent 
+                    key={'t-'+index} 
+                    taskContent={elem} 
+                    changeStatus={() => {         
+                      let newArr = [...tasksList];
+                      elem.status = (elem.status == 'open' ?'closed':'open');
+                      newArr[index] = elem;
+                      setTasksList(newArr);
+                    }}
+                  />
+                );
+              }
+            })
           }
         </div>
 

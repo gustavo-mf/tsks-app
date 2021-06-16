@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: sans-serif;
     background-color: #181820;
-    color: #fff;
+    color: #F5F5F6;
   }
 `;
 
@@ -18,7 +18,7 @@ const theme = {
   gray750: '#414052',
   gray850: '#272733',
   gray900: '#21212B',
-  font: '#fff',
+  font: '#F5F5F6',
   fontBtn: '#F5F5F6',
   black: '#181820'
 };

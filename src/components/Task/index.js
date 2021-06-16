@@ -2,24 +2,62 @@ import styled from 'styled-components';
 import Moment from 'react-moment';
 import 'moment-timezone';
 
-import { IconName } from "react-icons/fi";
+import { FiCircle, FiCheckCircle, FiMoreHorizontal } from "react-icons/fi";
 //FiCircle
 //FiCheckCircle
 
 const TaskContainer = styled.div`
   width: 100%;
+  margin-bottom: 2em;
+  border-radius: 20px;
+  background-color: ${props => props.theme.gray850};
+  
+  .taskBody, .taskHeader, .taskFooter {
+    padding: 20px;
+    font-size: 16px;
+
+    svg {
+      color: ${props => props.theme.purple};
+    }
+  }
+
+  .taskHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      i { margin-right: 20px; }
+    }
+  }
+
+  .taskBody {
+    background-color: ${props => props.theme.gray900};
+    line-height: 26px;
+  }
+
+  .taskFooter {
+    text-align: center;
+  }
 `;
 
-export default function Task({ taskContent, onChange }) {
-  
+export default function Task({ taskContent, changeStatus }) {
+  console.log('[taskContent]',taskContent);
   return (
     <TaskContainer>
       <div className="taskHeader">
         <div>
-          icon
+          <i 
+            onClick={changeStatus}
+          >
+            {taskContent.status == 'open' ? <FiCircle size="30"/> : <FiCheckCircle size="35"/>}
+          </i>
           {taskContent.title}
         </div>
-        icon more actions
+        <FiMoreHorizontal size="25" />
       </div>
       <div className="taskBody">
         {taskContent.description}
