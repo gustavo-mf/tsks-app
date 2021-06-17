@@ -119,10 +119,7 @@ export default function Task({ taskContent, changeStatus, editTask, removeTask }
       <div className="taskHeader">
         <div>
           <i 
-            onClick={() => {
-
-              //changeStatus
-            }}
+            onClick={changeStatus}
           >
             {taskContent.status == 'open' ? <FiCircle size="30"/> : <FiCheckCircle size="35"/>}
           </i>
