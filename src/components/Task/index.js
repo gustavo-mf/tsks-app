@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import Animate from 'animate.css-react'
 
 import { FiCircle, FiCheckCircle, FiMoreHorizontal, FiEdit2, FiTrash2 } from "react-icons/fi";
 //FiCircle
@@ -116,8 +115,7 @@ const TaskContainer = styled.div`
 export default function Task({ taskContent, changeStatus, editTask, removeTask }) {
   const [showOptions, setShowOptions] = React.useState(false);
   return (
-    <Animate>
-      <TaskContainer>
+    <TaskContainer>
       <div className="taskHeader">
         <div>
           <i 
@@ -158,6 +156,5 @@ export default function Task({ taskContent, changeStatus, editTask, removeTask }
         </Moment>
       </div>
     </TaskContainer>
-    </Animate>
   );
 }
