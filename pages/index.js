@@ -26,10 +26,17 @@ const MainWrapper = styled.main`
   h1 { 
     font-size: 42px; 
     margin-bottom: 61px;
+    @media screen and (max-width: 500px) {
+      margin-bottom: 27px;
+    }
   }
 
   .containerStatus {
     margin-bottom: 60px;
+
+    @media screen and (max-width: 500px) {
+      margin-bottom: 37px;
+    }
 
     button {
       border-radius: 20px;
@@ -108,6 +115,10 @@ export default function Home() {
         <title>Tsks. app</title>
         <meta name="description" content="Created for a test on outboxup" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
       </Head>
 
       <Header newTaskClick={

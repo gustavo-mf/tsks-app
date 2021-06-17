@@ -32,6 +32,7 @@ const ModalWrapper = styled.div`
       left: 0;
       width: calc(100% - 32px) ;
       transform: translate(0, calc( -50% - 16px));
+      padding: 60px 28px;
     }
 
     .modalHeader {
@@ -54,7 +55,7 @@ const ModalWrapper = styled.div`
       input, textarea {
         max-width: 480px;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 38px;
         border-radius: 20px;
         background-color: ${props => props.theme.gray850};
         border: none;

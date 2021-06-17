@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import Animate from 'animate.css-react'
 
 import { FiCircle, FiCheckCircle, FiMoreHorizontal, FiEdit2, FiTrash2 } from "react-icons/fi";
 //FiCircle
@@ -29,6 +30,16 @@ const TaskContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
+
+    @media screen and (max-width: 500px) {
+      padding: 14px 16px 9px;
+
+      i > svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
 
     div {
       display: flex;
@@ -87,21 +98,33 @@ const TaskContainer = styled.div`
   .taskBody {
     background-color: ${props => props.theme.gray900};
     line-height: 26px;
+
+    @media screen and (max-width: 500px) {
+      padding: 19px 2px 19px 8px;
+    }
   }
 
   .taskFooter {
     text-align: center;
+
+    @media screen and (max-width: 500px) {
+      padding: 7px;
+    }
   }
 `;
 
 export default function Task({ taskContent, changeStatus, editTask, removeTask }) {
   const [showOptions, setShowOptions] = React.useState(false);
   return (
-    <TaskContainer>
+    <Animate>
+      <TaskContainer>
       <div className="taskHeader">
         <div>
           <i 
-            onClick={changeStatus}
+            onClick={() => {
+
+              //changeStatus
+            }}
           >
             {taskContent.status == 'open' ? <FiCircle size="30"/> : <FiCheckCircle size="35"/>}
           </i>
@@ -135,5 +158,6 @@ export default function Task({ taskContent, changeStatus, editTask, removeTask }
         </Moment>
       </div>
     </TaskContainer>
+    </Animate>
   );
 }

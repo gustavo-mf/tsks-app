@@ -6,6 +6,10 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   margin-bottom: 60px;
 
+  @media screen and (max-width: 500px) {
+    margin-bottom: 40px;
+  }
+
   .appName {
     display: flex;
     align-items: center;
@@ -34,7 +38,9 @@ const HeaderWrapper = styled.header`
     cursor: pointer;
 
     @media screen and (max-width: 500px) {
-      padding: 15px 63px;
+      padding: 15px 0;
+      width: 100%;
+      max-width: 163px;
     }
   }
 `;
