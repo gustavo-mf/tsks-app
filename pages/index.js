@@ -54,9 +54,14 @@ const MainWrapper = styled.main`
 
       button {
         width: 47%;
-        padding: 14px 60px;
+        padding: 14px 0;
       }
     }
+  }
+
+  .noTask {
+    font-size: 26px;
+    color: ${props => props.theme.purple};
   }
 `;
 
@@ -64,7 +69,39 @@ export default function Home() {
   const [status, setStatus] = React.useState('open');
   const [tasksList, setTasksList] = React.useState(tasks);
   const [showModal, setshowModal] = React.useState(false);
-  
+  const [taskToEdit, setTaskToEdit] = React.useState(null);
+
+  const arrayTasks = tasksList.map((elem, index) => {
+    if(elem.status == status) {
+      return (
+        <TaskComponent 
+          key={'t-'+index} 
+          taskContent={elem} 
+          changeStatus={() => {         
+            let newArr = [...tasksList];
+            elem.status = (elem.status == 'open' ?'closed':'open');
+            newArr[index] = elem;
+            setTasksList(newArr);
+          }}
+          editTask={() => {
+            const taskCopy = elem;
+            taskCopy.index = index;
+
+            setTaskToEdit(taskCopy);
+            setshowModal(true);
+          }}
+          removeTask={() => {
+            let newArr = tasksList.filter((cur, indexFilter) => {
+              return indexFilter != index;
+            });
+            
+            setTasksList(newArr);
+          }}
+        />
+      );
+    }
+  }).filter((elem) => elem);
+
   return (
     <BodyWrapper>
       <Head>
@@ -73,7 +110,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header newTask={() => setshowModal(true) }/>
+      <Header newTaskClick={
+        () => {
+          setTaskToEdit(null);
+          setshowModal(true);
+        }}
+      />
         
       <MainWrapper>
         <h1>
@@ -92,31 +134,44 @@ export default function Home() {
         </div>
 
         <div className="containerTasks" >
-          {
-            tasksList.map((elem, index) => {
-              if(elem.status == status) {
-                return (
-                  <TaskComponent 
-                    key={'t-'+index} 
-                    taskContent={elem} 
-                    changeStatus={() => {         
-                      let newArr = [...tasksList];
-                      elem.status = (elem.status == 'open' ?'closed':'open');
-                      newArr[index] = elem;
-                      setTasksList(newArr);
-                    }}
-                  />
-                );
-              }
-            })
-          }
+          {console.log(arrayTasks)}
+          { arrayTasks.length > 0 ? arrayTasks : <p className="noTask">No tasks</p> }
+          
         </div>
 
       </MainWrapper>
 
       <Footer />
 
-      <Modal show={showModal} close={() => setshowModal(false)}/>
+      <Modal 
+        show={showModal} 
+        close={() => setshowModal(false)}
+        task={taskToEdit}
+        saveTask={(title, description) => {
+          if(taskToEdit) {
+            //edit task
+
+            const newArr = [...tasksList];
+            const newTask = taskToEdit;
+            newTask.title = title;
+            newTask.description = description;
+
+            newArr[newTask.index] = newTask;
+            setTasksList(newArr);
+          } else {
+            //new task
+            const newTask = {
+              "title": title,
+              "description": description,
+              "creationDate": new Date().toISOString(),
+              "status": "open"
+            };
+
+            const newArr = [newTask, ...tasksList];
+            setTasksList(newArr);
+          }
+        }}
+      />
     </BodyWrapper>
   )
 }

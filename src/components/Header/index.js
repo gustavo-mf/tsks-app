@@ -32,10 +32,14 @@ const HeaderWrapper = styled.header`
     padding: 15px 63px;
     font-size: 16px;
     cursor: pointer;
+
+    @media screen and (max-width: 500px) {
+      padding: 15px 63px;
+    }
   }
 `;
 
-export default function Header({ newTask }) {
+export default function Header({ newTaskClick }) {
   return (
     <HeaderWrapper>
       <div className="appName">
@@ -44,7 +48,7 @@ export default function Header({ newTask }) {
         </div>
         tsks.
       </div>
-      <button onClick={newTask}>New Task</button>
+      <button onClick={newTaskClick}>New Task</button>
     </HeaderWrapper>
   );
 }

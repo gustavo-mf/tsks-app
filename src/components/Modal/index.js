@@ -22,6 +22,17 @@ const ModalWrapper = styled.div`
     padding: 60px 48px;
     border-radius: 20px;
     background-color: ${props => props.theme.gray900};
+    width: 100%;
+    max-width: 576px;
+
+    @media screen and (max-width: 650px) {
+      margin: 16px;
+      top: 50%;
+      transform: none;
+      left: 0;
+      width: calc(100% - 32px) ;
+      transform: translate(0, calc( -50% - 16px));
+    }
 
     .modalHeader {
       margin-bottom: 44px;
@@ -76,18 +87,24 @@ const ModalWrapper = styled.div`
       }
     }
 
-    @media screen and (max-width: 650px) {
-      margin: 78px 16px;
-      top: 0;
-      transform: none;
-      left: 0;
-      width: calc(100% - 32px) ;
-    }
   }
 `;
 
-export default function modal({ show, close }) {
+export default function modal({ show, close, task, saveTask }) {
   if(!show) return null;
+  
+  const taskCopy = {
+    title:'',
+    description: ''
+  };
+
+  if(task) {
+    taskCopy.title = task.title;
+    taskCopy.description = task.description;
+  }
+
+  const [title, setTitle] = React.useState(taskCopy.title);
+  const [description, setDescription] = React.useState(taskCopy.description);
 
   return (
     <ModalWrapper>
@@ -97,13 +114,29 @@ export default function modal({ show, close }) {
           <div className="iconContainer" onClick={close}>
             <AiOutlineClose size="18" />
           </div>
-          <div className="titleContainer">New Task</div>
+          <div className="titleContainer">
+            { (task ? 'Edit Task' : 'New Task') }
+          </div>
         </div>
         
         <div className="modalBody">
-          <input placeholder="Title" />
-          <textarea placeholder="Description" />
-          <button>Save</button>
+          <input 
+            placeholder="Title" 
+            value={title} 
+            onChange={(infos) => {setTitle(infos.target.value);}} 
+          />
+          <textarea 
+            placeholder="Description" 
+            value={description} 
+            onChange={(infos) => {setDescription(infos.target.value);}} 
+          />
+          <button 
+            onClick={() => {
+              saveTask(title, description);
+              close();
+            }}>
+              Save
+            </button>
         </div>
       </div>
     </ModalWrapper>
